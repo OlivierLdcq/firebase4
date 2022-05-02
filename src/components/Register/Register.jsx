@@ -63,20 +63,6 @@ const Register = () => {
           onChange={handleChange}
         />
 
-        {/* <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-        /> */}
         <Button type="submit" buttonType="default">
           register{" "}
         </Button>
