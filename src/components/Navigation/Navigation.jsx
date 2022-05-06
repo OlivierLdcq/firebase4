@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import "./Navigation.scss";
 import { ReactComponent as Icon } from "./icon.svg";
 import { ReactComponent as Icon2 } from "../../assets/circles.svg";
+import { ReactComponent as Icon3 } from "../../assets/waves.svg";
 import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../CartIcon/CartIcon";
@@ -27,7 +28,7 @@ const Navigation = () => {
         <Link className="LogoCtn" to="/">
           {" "}
           <div className="NavLogo">
-            <Icon />
+            <Icon3 id="logo" />
           </div>
         </Link>
         <div className="navLinksCtn">
