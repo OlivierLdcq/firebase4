@@ -7,6 +7,8 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 import { getFirestore, getDoc, setDoc, doc } from "firebase/firestore";
@@ -38,6 +40,7 @@ const db = getFirestore(app);
 
 export const FNcreateUserWithEmailAndPassword = async (registerForm) => {
   const { displayName, email, password } = registerForm;
+  if (!email || !password || !displayName) return;
   const userCredentials = await createUserWithEmailAndPassword(
     auth,
     email,
@@ -50,11 +53,10 @@ export const FNcreateUserWithEmailAndPassword = async (registerForm) => {
 export const FNsignInWithEmailAndPassword = async (signInForm) => {
   const { email, password } = signInForm;
 
-  if (!email || !password) {
-    return;
-  }
+  if (!email || !password) return;
+
   const { user } = await signInWithEmailAndPassword(auth, email, password);
-  console.log(user);
+  // console.log(user);
   return user;
 };
 
@@ -81,4 +83,12 @@ export const createUserData = async (user, additionalInformations = {}) => {
       console.log("error pushing data in the DB");
     }
   }
+};
+
+export const signOutUser = async () => {
+  return await signOut(auth);
+};
+
+export const onAuthStateChangedListener = (callback) => {
+  return onAuthStateChanged(auth, callback);
 };

@@ -3,13 +3,17 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  background-color: rgba(207, 207, 207, 0.331);
+  background-color: rgba(207, 207, 207, 0.025);
   .LogoCtn {
     display: flex;
     padding: 1px;
     height: 50px;
+    // background-color: blue;
+    // box-sizing: border-box;
     .NavLogo {
-      //   background-color: blue;
+      height: 100%;
+      width: 100%;
+      // background-color: blue;
     }
   }
   .brand {

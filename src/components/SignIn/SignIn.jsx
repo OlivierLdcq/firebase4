@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useContext } from "react";
 import {
   createUserData,
   FNsignInWithEmailAndPassword,
@@ -6,6 +6,8 @@ import {
 } from "../../utils/firebase/firebase";
 import Button from "../Button/Button";
 import FormInput from "../FormInput/FormInput";
+import { UserContext } from "../../contexts/user.context";
+
 import "./SignIn.scss";
 
 const SignIn = () => {
@@ -18,14 +20,14 @@ const SignIn = () => {
 
     resetFormField();
   };
+  // const { setCurrentUser } = useContext(UserContext);
   const [signInForm, setSignInForm] = useState(defaultSignInForm);
   const resetFormField = () => {
     setSignInForm(defaultSignInForm);
   };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(value);
+    // console.log(value);
     setSignInForm({ ...signInForm, [name]: value });
   };
   const { email, password } = signInForm;
@@ -36,9 +38,10 @@ const SignIn = () => {
     if (!email || !password) return;
     try {
       const result = await FNsignInWithEmailAndPassword(signInForm);
-      console.log(result);
+      // console.log(result);
       if (result.uid) {
         console.log("hey ! :) we have a valid user !");
+        // setCurrentUser(result);
         resetFormField();
       }
     } catch (err) {
@@ -57,11 +60,10 @@ const SignIn = () => {
   };
 
   const SignInWithGoogleSubmit = async () => {
-    const { user } = await signInWithGooglePopUp();
-    console.log(user.uid);
-    createUserData(user);
+    await signInWithGooglePopUp();
+    // console.log(user.uid);
   };
-  console.log(signInForm);
+  // console.log(signInForm);
 
   return (
     <div className="SignIn">
