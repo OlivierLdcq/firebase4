@@ -1,0 +1,12 @@
+//je vais avoir besoin :
+// click checkout dans le cart => changer de route et m'emmener sur la page checkout
+// la page checkout va être créée dans "Routes", je vais faire un squelette avec les informations
+/// liées aux objets
+// Product,Description,Quantity,Price,Remove
+// ligne
+//ensuite on map à travers la liste de cartItems et on affiche
+//un composant <CheckOutItem qui va afficher : name,quantity,price, remove/>
+// on doit pouvoir modifier la quantiy sur le Checkout Item,
+// il faut que cete valeur se reflète dans le quantity de cartItem, et bien sûr le remove
+// qui doit enlever l'élément de la liste CartItems
+
