@@ -11,7 +11,16 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getFirestore, getDoc, setDoc, doc } from "firebase/firestore";
+import {
+  getFirestore,
+  getDoc,
+  setDoc,
+  doc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCv0nTZrm75QPslIm96hW8TZV6XgdhHNM8",
@@ -36,7 +45,40 @@ export const signInWithGoogleRedirect = () => {
   return signInWithRedirect(auth, provider);
 };
 
+export const FNsignInWithEmailAndPassword = async (signInForm) => {
+  const { email, password } = signInForm;
+
+  if (!email || !password) return;
+
+  const { user } = await signInWithEmailAndPassword(auth, email, password);
+  // console.log(user);
+  return user;
+};
 const db = getFirestore(app);
+
+export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+  objectToAdd.forEach((item) => {
+    const docRef = doc(collectionRef, item.title.toLowerCase());
+    batch.set(docRef, item);
+  });
+  await batch.commit();
+  console.log("done");
+};
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, "categories");
+  const q = query(collectionRef);
+  const querySnapShot = await getDocs(q);
+  console.log("this is the querysnapshot");
+  const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
+    const { title, items } = docSnapShot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+  return categoryMap;
+};
 
 export const FNcreateUserWithEmailAndPassword = async (registerForm) => {
   const { displayName, email, password } = registerForm;
@@ -50,20 +92,11 @@ export const FNcreateUserWithEmailAndPassword = async (registerForm) => {
   return userCredentials;
 };
 
-export const FNsignInWithEmailAndPassword = async (signInForm) => {
-  const { email, password } = signInForm;
-
-  if (!email || !password) return;
-
-  const { user } = await signInWithEmailAndPassword(auth, email, password);
-  // console.log(user);
-  return user;
-};
-
 export const createUserData = async (user, additionalInformations = {}) => {
   const { email, displayName } = user;
   const createdAt = new Date();
   const userDocRef = doc(db, "users", user.uid);
+  console.log("this is the userDocRef : ", userDocRef);
   const userSnapShot = await getDoc(userDocRef);
   if (!userSnapShot.exists()) {
     console.log("there is no data at the require adress in the DB");

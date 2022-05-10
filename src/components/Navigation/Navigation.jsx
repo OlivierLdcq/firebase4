@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
-import "./Navigation.scss";
+import { NavigationContainer } from "./Navigation.STYLE.jsx";
 import { ReactComponent as Icon } from "./icon.svg";
 import { ReactComponent as Icon2 } from "../../assets/circles.svg";
 import { ReactComponent as Icon3 } from "../../assets/waves.svg";
@@ -24,7 +24,7 @@ const Navigation = () => {
   console.log("this tis cartOPen", cartOpen);
   return (
     <>
-      <div className="Navigation">
+      <NavigationContainer>
         <Link className="LogoCtn" to="/">
           {" "}
           <div className="NavLogo">
@@ -46,8 +46,8 @@ const Navigation = () => {
           )}
           <CartIcon />
         </div>
-        {cartOpen && <CartDropDown />}
-      </div>
+        {cartOpen && <CartDropDown className="CartDropDown" />}
+      </NavigationContainer>{" "}
       <Outlet />
     </>
   );

@@ -31,7 +31,6 @@ const CheckOutItem = ({ item }) => {
         </div>
         <div
           className="remove"
-          style={{ marginLeft: "200px" }}
           onClick={() => removeItemToCart(item, "delete")}
         >
           ╳
