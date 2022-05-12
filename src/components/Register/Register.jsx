@@ -1,13 +1,12 @@
 import React from "react";
 import "./Register.scss";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import {
   FNcreateUserWithEmailAndPassword,
   createUserData,
 } from "../../utils/firebase/firebase";
-import FormInput from "../FormInput/FormInput";
-import Button from "../Button/Button";
-import { UserContext } from "../../contexts/user.context";
+import FormInput from "../FormInput/FormInput.Component.jsx";
+import Button from "../Button/Button.Component.jsx";
 const Register = () => {
   const defaultRegisterForm = {
     displayName: "",
@@ -36,8 +35,7 @@ const Register = () => {
     setRegisterForm({ ...registerForm, [name]: value });
   };
   const { displayName, email, password } = registerForm;
-  // console.log(registerForm);
-  /// *********** ///
+
   return (
     <div className="Register">
       <h2>Don't have an account ?</h2>
@@ -65,7 +63,7 @@ const Register = () => {
           onChange={handleChange}
         />
 
-        <Button type="submit" buttonType="default">
+        <Button type="submit" buttonType="base">
           register{" "}
         </Button>
       </form>

@@ -4,13 +4,14 @@ import {
   FNsignInWithEmailAndPassword,
   signInWithGooglePopUp,
 } from "../../utils/firebase/firebase";
-import Button from "../Button/Button";
-import FormInput from "../FormInput/FormInput";
+import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button.Component.jsx";
+import FormInput from "../FormInput/FormInput.Component.jsx";
 import { UserContext } from "../../contexts/user.context";
 
 import "./SignIn.scss";
 
 const SignIn = () => {
+  // console.log(BUTTON_TYPE_CLASSES.inverted);
   const defaultSignInForm = {
     email: "",
     password: "",
@@ -20,6 +21,7 @@ const SignIn = () => {
 
     resetFormField();
   };
+
   // const { setCurrentUser } = useContext(UserContext);
   const [signInForm, setSignInForm] = useState(defaultSignInForm);
   const resetFormField = () => {
@@ -86,12 +88,12 @@ const SignIn = () => {
         />
         <div className="btnBlock">
           {" "}
-          <Button type="submit" buttonType="default">
+          <Button type="submit" buttonType="base">
             SignIn
           </Button>
           <Button
             type="button"
-            buttonType="google"
+            buttonType={BUTTON_TYPE_CLASSES.google}
             onClick={SignInWithGoogleSubmit}
           >
             Google SignIn

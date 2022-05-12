@@ -64,14 +64,12 @@ export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
     batch.set(docRef, item);
   });
   await batch.commit();
-  console.log("done");
 };
 
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, "categories");
   const q = query(collectionRef);
   const querySnapShot = await getDocs(q);
-  console.log("this is the querysnapshot");
   const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
     const { title, items } = docSnapShot.data();
     acc[title.toLowerCase()] = items;

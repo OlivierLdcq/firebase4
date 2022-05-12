@@ -1,53 +1,49 @@
 import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { NavigationContainer } from "./Navigation.STYLE.jsx";
-import { ReactComponent as Icon } from "./icon.svg";
-import { ReactComponent as Icon2 } from "../../assets/circles.svg";
+import {
+  LogoContainerSC,
+  NavigationContainerSC,
+  NavLinkSC,
+  NavLinksContainerSC,
+} from "./Navigation.Style.js";
 import { ReactComponent as Icon3 } from "../../assets/waves.svg";
 import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/firebase";
-import CartIcon from "../CartIcon/CartIcon";
-import CartDropDown from "../CartDropDown/CartDropDown";
+import CartIcon from "../CartIcon/CartIcon.Component";
+import CartDropDown from "../CartDropDown/CartDropDown.Component";
 import { CartContext } from "../../contexts/cart.context";
 const Navigation = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
   const { cartOpen, setCartOpen } = useContext(CartContext);
   // const { currentUser, setCurrentUser } = useContext(UserContext);
-  console.log("this is the current User from context : ");
-  console.log(currentUser);
   const signOutHandler = async () => {
     await signOutUser();
     // setCurrentUser(null);
   };
 
-  console.log("this tis cartOPen", cartOpen);
   return (
     <>
-      <NavigationContainer>
-        <Link className="LogoCtn" to="/">
+      <NavigationContainerSC>
+        <LogoContainerSC to="/">
           {" "}
           <div className="NavLogo">
             <Icon3 id="logo" />
           </div>
-        </Link>
-        <div className="navLinksCtn">
-          <Link className="navLink" to="/shop">
-            SHOP
-          </Link>
+        </LogoContainerSC>
+        <NavLinksContainerSC>
+          <NavLinkSC to="/shop">SHOP</NavLinkSC>
           {currentUser ? (
-            <span className="navLink" onClick={signOutHandler}>
+            <NavLinkSC as="span" onClick={signOutHandler}>
               SIGNOUT
-            </span>
+            </NavLinkSC>
           ) : (
-            <Link className="navLink" to="/signin">
-              SIGNIN
-            </Link>
+            <NavLinkSC to="/signin">SIGNIN</NavLinkSC>
           )}
           <CartIcon />
-        </div>
+        </NavLinksContainerSC>{" "}
         {cartOpen && <CartDropDown className="CartDropDown" />}
-      </NavigationContainer>{" "}
+      </NavigationContainerSC>{" "}
       <Outlet />
     </>
   );

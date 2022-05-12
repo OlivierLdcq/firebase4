@@ -20,7 +20,6 @@ export const UserProvider = ({ children }) => {
       if (user) {
         createUserData(user);
       }
-      console.log(user);
       setCurrentUser(user);
     });
     return Unsubscribe;

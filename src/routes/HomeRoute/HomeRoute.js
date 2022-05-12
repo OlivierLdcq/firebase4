@@ -1,10 +1,10 @@
 import React from "react";
-import Categories from "../../components/Categories/Categories";
+import Directory from "../../components/Directory/Directory";
 import "./HomeRoute.scss";
 const HomeRoute = () => {
   return (
     <div className="Shop">
-      <Categories />
+      <Directory />
     </div>
   );
 };

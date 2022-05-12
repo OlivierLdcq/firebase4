@@ -1,4 +1,38 @@
-.Category {
+import styled from "styled-components";
+
+export const BackgroundImageCS = styled.div`
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+`;
+
+export const BodyCS = styled.div`
+  color: grey;
+  background-color: white;
+  padding: 10px;
+  opacity: 0.7;
+  position: absolute;
+  text-align: center;
+  height: 90px;
+  border: solid white 2px;
+  cursor: pointer;
+  transition: all ease 1s;
+  h2 {
+    text-transform: uppercase;
+    font-weight: bolder;
+    padding: 0px;
+    margin: 0px;
+  }
+  p {
+    color: rgb(142, 142, 142);
+    position: relative;
+    bottom: 10px;
+  }
+`;
+
+export const DirectoryCS = styled.div`
   min-width: 30%;
   height: 240px;
   display: flex;
@@ -11,20 +45,23 @@
   &:hover {
     cursor: pointer;
 
-    & .backgroundImage {
+    & ${BackgroundImageCS} {
       transform: scale(1.1);
       transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
     }
 
-    & .categoryBody {
+    & ${BodyCS} {
       opacity: 0.9;
     }
   }
+`;
+
+/* 
+.Category {
+ 
+  }
   .backgroundImage {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
+ 
   }
   .categoryBody {
     color: grey;
@@ -46,8 +83,7 @@
       color: rgb(142, 142, 142);
       position: relative;
       bottom: 10px;
-      // padding: 0px;
-      // margin: 0px;
+     
     }
   }
-}
+} */
